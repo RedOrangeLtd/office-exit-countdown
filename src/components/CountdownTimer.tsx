@@ -20,7 +20,7 @@ const CountdownTimer = () => {
   const getTargetTime = () => {
     const now = new Date();
     const target = new Date();
-    target.setHours(14, 52, 0, 0); // 5:30 PM
+    target.setHours(17, 30, 0, 0); // 5:30 PM
     
     // If it's already past 5:30 PM today, set it for tomorrow
     if (now > target) {
