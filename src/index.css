@@ -2,41 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Farewell countdown app design system */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 225 25% 5%;
+    --foreground: 48 100% 88%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 225 25% 8%;
+    --card-foreground: 48 100% 88%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 225 25% 8%;
+    --popover-foreground: 48 100% 88%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 280 100% 70%;
+    --primary-foreground: 225 25% 5%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 315 100% 65%;
+    --secondary-foreground: 225 25% 5%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 45 100% 60%;
+    --accent-foreground: 225 25% 5%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 225 20% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --success: 130 100% 60%;
+    --success-foreground: 225 25% 5%;
+
+    --warning: 30 100% 65%;
+    --warning-foreground: 225 25% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 225 20% 20%;
+    --input: 225 20% 20%;
+    --ring: 280 100% 70%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(315 100% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(315 100% 65%), hsl(45 100% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 60%), hsl(130 100% 60%));
+    --gradient-background: linear-gradient(135deg, hsl(225 25% 5%), hsl(225 30% 8%));
+
+    /* Animation variables */
+    --animation-duration: 0.6s;
+    --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +115,95 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    min-height: 100vh;
   }
+}
+
+@layer components {
+  .countdown-glow {
+    @apply shadow-2xl;
+    box-shadow: 0 0 50px hsl(var(--primary) / 0.5);
+  }
+  
+  .firework {
+    @apply absolute rounded-full;
+    animation: explode 1s ease-out forwards;
+  }
+  
+  .pulse-ring {
+    @apply absolute rounded-full border-4 border-primary;
+    animation: pulse-ring 2s infinite;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-border {
+    background: var(--gradient-primary);
+    padding: 2px;
+    border-radius: var(--radius);
+  }
+  
+  .gradient-bg {
+    background: var(--gradient-primary);
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes countdown-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.countdown-digit {
+  animation: countdown-pulse 1s ease-in-out infinite;
 }
